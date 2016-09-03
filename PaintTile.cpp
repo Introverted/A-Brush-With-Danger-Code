@@ -1,3 +1,4 @@
+///////////////// Jocelyn Cruz /////////////////
 #include "PaintTile.h"
 
 PaintTile* PaintTile::create()
