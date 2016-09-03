@@ -1,3 +1,4 @@
+///////////////// Jocelyn Cruz /////////////////
 #include "MenuScene.h"
 
 Scene* MenuScene::createMenu()
@@ -19,13 +20,8 @@ bool MenuScene::init()
 	}
 
 	//listeners init
-	joyListener = EventListenerJoystick::create();
-	joyListener->onEvent = CC_CALLBACK_1(MenuScene::Joystick, this);
-	_eventDispatcher->addEventListenerWithFixedPriority(joyListener, 1);
-
 	keyListener = EventListenerKeyboard::create();
 	keyListener->onKeyPressed = CC_CALLBACK_2(MenuScene::KeyDown, this);
-	//keyListener->onKeyReleased = CC_CALLBACK_2(MenuScene::KeyRelease, this);
 
 	_eventDispatcher->addEventListenerWithFixedPriority(keyListener, 2);
 	//listeners init end
@@ -55,23 +51,12 @@ bool MenuScene::init()
 	title->setPosition(Vec2((int)winSizeWidth - 10, (int)winSizeHeight + 110));
 	this->addChild(title, 0);
 
-	if (MUSIC_ON)
-	{
-		experimental::AudioEngine::play2d("\\res\\sound\\music\\menu_music.mp3", true, 0.4f);
-	}
-
 	return true;
 }
 
 void MenuScene::server(cocos2d::Ref* pSender)
 {
-	_eventDispatcher->removeEventListener(joyListener);
-	//joyListener->release();
-	//joyListener = nullptr;
-
-	_eventDispatcher->removeEventListener(keyListener);
-	//keyListener->release();
-	//keyListener = nullptr;
+	eventDispatcher->removeEventListener(keyListener);
 
 	auto scene = ServerConnection::createServerConnection(0);
 	CCDirector::getInstance()->replaceScene(TransitionFade::create(0.5f,scene));
@@ -79,13 +64,7 @@ void MenuScene::server(cocos2d::Ref* pSender)
 
 void MenuScene::player(cocos2d::Ref* pSender)
 {
-	_eventDispatcher->removeEventListener(joyListener);
-	//joyListener->release();
-	//joyListener = nullptr;
-
 	_eventDispatcher->removeEventListener(keyListener);
-	//keyListener->release();
-	//keyListener = nullptr;
 
 	auto scene = PlayerConnection::createPlayerConnection();
 	CCDirector::getInstance()->replaceScene(TransitionFade::create(0.5f, scene));
@@ -100,41 +79,6 @@ void MenuScene::menuCloseCallback(Ref* pSender)
 	exit(0);
 #endif
 }
-
-void MenuScene::Joystick(cocos2d::Event* event)
-{
-	EventJoystick* e = (EventJoystick*)event;
-	//CCLOG("JOYSTICK PRESENT");
-	bool present = e->isPresent();
-	//CCLOG(std::to_string(present).c_str());
-	if (present)
-	{
-		//CCLOG(e->getName());
-
-		int forbutton;
-		const unsigned char* buttonval = e->getButtonValues(&forbutton);
-		unsigned char b0 = buttonval[0];
-		unsigned char b1 = buttonval[1];
-		unsigned char b2 = buttonval[2];
-		unsigned char b3 = buttonval[3];
-
-		if (b0 || b1 || b2 || b3)
-		{
-			player_button->selected();
-			button1 = true; //for key_release code
-			//add button to select hidden server button
-		}
-
-		if (button1 == true && !b0 && !b1 && !b2 && !b3) //button was pushed then released
-		{
-			button1 = false;
-			player_button->activate();
-		}
-
-	}
-	event->stopPropagation();
-}
-
 
 void MenuScene::KeyDown(EventKeyboard::KeyCode keyCode, Event* event)
 {
@@ -152,16 +96,6 @@ void MenuScene::KeyDown(EventKeyboard::KeyCode keyCode, Event* event)
 	event->stopPropagation();
 }
 
-/*void MenuScene::KeyRelease(EventKeyboard::KeyCode keyCode, Event* event)
-{
 
-	switch (keyCode) {
-	case EventKeyboard::KeyCode::KEY_UP_ARROW:
-		break;
-	}
-
-	event->stopPropagation();
-
-}*/
 
 
