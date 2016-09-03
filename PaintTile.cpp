@@ -1,4 +1,5 @@
 ///////////////// Jocelyn Cruz /////////////////
+// DID NOT PROGRAM THE ISDRY(), JUST KNEW WHERE TO USE IT ON THIS CODE
 #include "PaintTile.h"
 
 PaintTile* PaintTile::create()
@@ -216,20 +217,6 @@ PaintTile* PaintTile::create(std::string color)
 		}
 	}
 	/////////////////////////////
-	/*
-
-	if (color == "Xred")
-	{
-		if (pSprite->initWithFile("res//sprites//objects//tile_red_paint_incorrect.png"))
-		{
-			pSprite->setColor("Xred");
-
-			pSprite->autorelease();
-
-			pSprite->getTexture()->setAliasTexParameters();return pSprite;
-		}
-	}
-	*/
 	else if (color == "Xblue")
 	{
 		if (pSprite->initWithFile("res//sprites//objects//tile_incorrect_wet_blue1.png"))
