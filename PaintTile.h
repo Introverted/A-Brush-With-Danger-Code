@@ -1,3 +1,4 @@
+///////////////// Jocelyn Cruz /////////////////
 #ifndef _PAINTTILE_HPP_
 #define _PAINTTILE_HPP_
 
