@@ -1,9 +1,8 @@
+///////////////// Jocelyn Cruz /////////////////
 #include "HowToPlay.h"
 
-// CODE TO TRY
 std::string IPADDRESS = "";
 int PLAYERNUM = 1;
-//////////////
 
 Scene* HowToPlay::createHowToPlay()
 {
@@ -15,7 +14,6 @@ Scene* HowToPlay::createHowToPlay()
 	return HTPScene;
 }
 
-// CODE TO TRY
 Scene* HowToPlay::createHowToPlay(std::string ip, int pn)
 {
 	IPADDRESS = ip;
@@ -28,8 +26,6 @@ Scene* HowToPlay::createHowToPlay(std::string ip, int pn)
 
 	return HTPScene;
 }
-///////////////
-
 
 bool HowToPlay::init()
 {
@@ -59,10 +55,6 @@ bool HowToPlay::init()
 	Directions->setPosition(Vec2((int)winSizeWidth, (int)winSizeHeight));
 	this->addChild(Directions, 0);
 
-	joyListener = EventListenerJoystick::create();
-	joyListener->onEvent = CC_CALLBACK_1(HowToPlay::Joystick, this);
-	_eventDispatcher->addEventListenerWithFixedPriority(joyListener, 1);
-
 	keyListener = EventListenerKeyboard::create();
 	keyListener->onKeyPressed = CC_CALLBACK_2(HowToPlay::KeyDown, this);
 	_eventDispatcher->addEventListenerWithFixedPriority(keyListener, 2);
@@ -73,66 +65,17 @@ bool HowToPlay::init()
 
 void HowToPlay::begin(cocos2d::Ref* pSender)
 {
-	_eventDispatcher->removeEventListener(joyListener);
-	//joyListener->release();
-	//joyListener = nullptr;
-
 	_eventDispatcher->removeEventListener(keyListener);
-	//keyListener->release();
-	//keyListener = nullptr;
-
-	experimental::AudioEngine::stopAll();
-	auto scene = ClientDemo::createScene(IPADDRESS, PLAYERNUM); // CODE TO TRY
-	//CCDirector::getInstance()->replaceScene(scene);
-	Director::getInstance()->replaceScene(TransitionFade::create(2.0f, scene));
 }
 
 
 void HowToPlay::menuCloseCallback(Ref* pSender)
 {
-
 	Director::getInstance()->end();
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	exit(0);
 #endif
-}
-
-void HowToPlay::Joystick(cocos2d::Event* event)
-{
-	EventJoystick* e = (EventJoystick*)event;
-	//CCLOG("JOYSTICK PRESENT");
-	bool present = e->isPresent();
-	//CCLOG(std::to_string(present).c_str());
-	if (present)
-	{
-//		if (timeDelay == 0)
-//		{
-			int forbutton;
-			const unsigned char* buttonval = e->getButtonValues(&forbutton);
-			unsigned char b0 = buttonval[0];
-			unsigned char b1 = buttonval[1];
-			unsigned char b2 = buttonval[2];
-			unsigned char b3 = buttonval[3];
-
-			if (b0 || b1 || b2 || b3)
-			{
-				begin_button->selected();
-				button1 = true; //for key_release code
-			}
-
-			if (button1 == true && !b0 && !b1 && !b2 && !b3) //button was pushed then released
-			{
-				begin_button->activate();
-				button1 = false;
-			}
-//		}
-//		if (timeDelay > 0)
-//		{
-//			timeDelay--;
-//		}
-	}
-	event->stopPropagation();
 }
 
 void HowToPlay::KeyDown(EventKeyboard::KeyCode keyCode, Event* event)
