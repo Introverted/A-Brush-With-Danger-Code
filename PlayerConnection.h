@@ -1,3 +1,4 @@
+///////////////// Jocelyn Cruz /////////////////
 #ifndef __PLAYER_CONNECTION__
 #define __PLAYER_CONNECTION__
 
@@ -16,8 +17,7 @@ private:
 	Sprite* Directions;
 	CCTMXTiledMap* playerScreen;
 	cocos2d::MenuItemImage* begin_button;
-	EventListenerJoystick* joyListener;
-
+	
 	bool button1 = false;
 
 public:
@@ -30,10 +30,6 @@ public:
 	EventListenerKeyboard* keyboard;
 	void KeyP(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	void KeyNP(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
-
-	void Joystick(cocos2d::Event*);
-
-//	int timeDelay = 20;
 
 	CREATE_FUNC(PlayerConnection);
 
