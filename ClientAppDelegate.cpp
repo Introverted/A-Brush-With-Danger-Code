@@ -78,7 +78,9 @@ bool ClientAppDelegate::applicationDidFinishLaunching() {
 
     // create a scene. it's an autorelease object
     //auto scene = ClientDemo::createScene();
-	auto scene = MenuScene::createMenu();
+    
+    	// Will run the menu when game begins
+	auto scene = MenuScene::createMenu(); // Jocelyn Cruz 
 
 
 	// run
