@@ -1,3 +1,4 @@
+///////////////// Jocelyn Cruz /////////////////
 #ifndef __SERVER_CONNECTION__
 #define __SERVER_CONNECTION__
 
@@ -13,18 +14,6 @@ private:
 	Sprite* Directions;
 	CCTMXTiledMap* serverScreen;
 
-	Sprite* p1;
-	Sprite* p1Chara;
-
-	Sprite* p2;
-	Sprite* p2Chara;
-
-	Sprite* p3;
-	Sprite* p3Chara;
-	
-	Sprite* p4;
-	Sprite* p4Chara;
-
 	cocos2d::MenuItemImage* enter_button;
 	EventListenerJoystick* joyListener;
 	EventListenerKeyboard* keyListener;
@@ -34,7 +23,7 @@ private:
 public:
 	static cocos2d::Scene* createServerConnection(char chosencharacters);
 
-	static cocos2d::Scene* createServerConnection(std::string ipa, char chosencharacters); // NEW CODE TO TRY
+	static cocos2d::Scene* createServerConnection(std::string ipa, char chosencharacters); 
 
 	virtual bool init();
 	void menuCloseCallback(cocos2d::Ref * pSender);
@@ -48,10 +37,7 @@ public:
 	bool aPlayerChosen = false;
 	int playerNum = 1;
 
-	void Joystick(cocos2d::Event*);
 	void KeyDown(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
-
-	int timeDelay = 0; //so you dont skip screens if you hold down button too long on previous screen
 
 	CREATE_FUNC(ServerConnection);
 
