@@ -80,7 +80,7 @@ bool ClientAppDelegate::applicationDidFinishLaunching() {
     //auto scene = ClientDemo::createScene();
     
     	// Will run the menu when game begins
-	auto scene = MenuScene::createMenu(); // Jocelyn Cruz 
+	auto scene = MenuScene::createMenu(); ///////////////// Jocelyn Cruz /////////////////
 
 
 	// run
